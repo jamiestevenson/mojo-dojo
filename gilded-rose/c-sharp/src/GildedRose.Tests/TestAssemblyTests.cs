@@ -152,6 +152,19 @@ namespace GildedRose.Tests
         }
 
         [Fact]
+        public void TestItem_QualityIncrement_WontIncrementPastFifty()
+        {
+            var Items = new List<Item> {
+                new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 10, Quality = 80},
+            };
+            Program.UpdateQuality(Items);
+            Assert.NotNull(Items);
+            Assert.NotEmpty(Items);
+            Assert.Equal(Items[0].Name, "Sulfuras, Hand of Ragnaros");
+            Assert.Equal(Items[0].Quality, 80);
+        }
+
+        [Fact]
         public void Sulfuras_Ages()
         {
             var Items = new List<Item> {
@@ -176,5 +189,8 @@ namespace GildedRose.Tests
             Assert.Equal(Items[0].Name, "Sulfuras, Hand of Ragnaros");
             Assert.Equal(Items[0].Quality, 50);
         }
+
+        // backstage passes
+        // conjured items
     }
 }
