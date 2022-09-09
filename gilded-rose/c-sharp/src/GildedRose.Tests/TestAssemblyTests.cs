@@ -190,7 +190,130 @@ namespace GildedRose.Tests
             Assert.Equal(Items[0].Quality, 50);
         }
 
-        // backstage passes
+        [Fact]
+        public void ConcertTicket_QualityChange_QualityIncreasesSingle_longLead()
+        {
+            var Items = new List<Item> {
+                new Item {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20},
+            };
+            Program.UpdateQuality(Items);
+            Assert.NotNull(Items);
+            Assert.NotEmpty(Items);
+            Assert.Equal(Items[0].Name, "Backstage passes to a TAFKAL80ETC concert");
+            Assert.Equal(Items[0].SellIn, 14);
+            Assert.Equal(Items[0].Quality, 21);
+        }
+
+        [Fact]
+        public void ConcertTicket_QualityChange_QualityIncreasesSingle_lastSingleIncrease()
+        {
+            var Items = new List<Item> {
+                new Item {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 11, Quality = 15},
+            };
+            Program.UpdateQuality(Items);
+            Assert.NotNull(Items);
+            Assert.NotEmpty(Items);
+            Assert.Equal(Items[0].Name, "Backstage passes to a TAFKAL80ETC concert");
+            Assert.Equal(Items[0].SellIn, 10);
+            Assert.Equal(Items[0].Quality, 16);
+        }
+
+        [Fact]
+        public void ConcertTicket_QualityChange_QualityIncreasesDouble_tenDays()
+        {
+            var Items = new List<Item> {
+                new Item {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 10, Quality = 20},
+            };
+            Program.UpdateQuality(Items);
+            Assert.NotNull(Items);
+            Assert.NotEmpty(Items);
+            Assert.Equal(Items[0].Name, "Backstage passes to a TAFKAL80ETC concert");
+            Assert.Equal(Items[0].SellIn, 9);
+            Assert.Equal(Items[0].Quality, 22);
+        }
+
+        [Fact]
+        public void ConcertTicket_QualityChange_QualityIncreasesDouble_sixDays()
+        {
+            var Items = new List<Item> {
+                new Item {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 6, Quality = 20},
+            };
+            Program.UpdateQuality(Items);
+            Assert.NotNull(Items);
+            Assert.NotEmpty(Items);
+            Assert.Equal(Items[0].Name, "Backstage passes to a TAFKAL80ETC concert");
+            Assert.Equal(Items[0].SellIn, 5);
+            Assert.Equal(Items[0].Quality, 22);
+        }
+
+        [Fact]
+        public void ConcertTicket_QualityChange_QualityIncreasesTriple_fourDays()
+        {
+            var Items = new List<Item> {
+                new Item {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 4, Quality = 8},
+            };
+            Program.UpdateQuality(Items);
+            Assert.NotNull(Items);
+            Assert.NotEmpty(Items);
+            Assert.Equal(Items[0].Name, "Backstage passes to a TAFKAL80ETC concert");
+            Assert.Equal(Items[0].SellIn, 3);
+            Assert.Equal(Items[0].Quality, 11);
+        }
+
+        [Fact]
+        public void ConcertTicket_QualityChange_QualityIncreasesTriple_oneDay()
+        {
+            var Items = new List<Item> {
+                new Item {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 1, Quality = 13},
+            };
+            Program.UpdateQuality(Items);
+            Assert.NotNull(Items);
+            Assert.NotEmpty(Items);
+            Assert.Equal(Items[0].Name, "Backstage passes to a TAFKAL80ETC concert");
+            Assert.Equal(Items[0].SellIn, 0);
+            Assert.Equal(Items[0].Quality, 16);
+        }
+
+        [Fact]
+        public void ConcertTicket_QualityChange_ZeroQuality_afterConcert()
+        {
+            var Items = new List<Item> {
+                new Item {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 0, Quality = 34},
+            };
+            Program.UpdateQuality(Items);
+            Assert.NotNull(Items);
+            Assert.NotEmpty(Items);
+            Assert.Equal(Items[0].Name, "Backstage passes to a TAFKAL80ETC concert");
+            Assert.Equal(Items[0].SellIn, -1);
+            Assert.Equal(Items[0].Quality, 0);
+        }
+
+        [Fact]
+        public void ConcertTicket_QualityChange_QualityIncreasesSingle()
+        {
+            var Items = new List<Item> {
+                new Item {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20},
+            };
+            Program.UpdateQuality(Items);
+            Assert.NotNull(Items);
+            Assert.NotEmpty(Items);
+            Assert.Equal(Items[0].Name, "Backstage passes to a TAFKAL80ETC concert");
+            Assert.Equal(Items[0].SellIn, 14);
+            Assert.Equal(Items[0].Quality, 21);
+        }
         // conjured items
+        [Fact]
+        public void ConjuredItems_QualityChange_DegradeTwiceAsFast()
+        {
+            var Items = new List<Item> {
+                new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6},
+            };
+            Program.UpdateQuality(Items);
+            Assert.NotNull(Items);
+            Assert.NotEmpty(Items);
+            Assert.Equal(Items[0].Name, "Conjured Mana Cake");
+            Assert.Equal(Items[0].SellIn, 2);
+            Assert.Equal(Items[0].Quality, 4);
+        }
     }
 }

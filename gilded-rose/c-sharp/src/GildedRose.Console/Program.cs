@@ -44,7 +44,13 @@ namespace GildedRose.Console
                     {
                         if (items[i].Name != "Sulfuras, Hand of Ragnaros")
                         {
-                            items[i].Quality = items[i].Quality - 1;
+                            if (items[i].Name == "Conjured Mana Cake")
+                            {
+                                items[i].Quality = items[i].Quality - 2;
+                            }
+                            else {
+                                items[i].Quality = items[i].Quality - 1;
+                            }
                         }
                     }
                 }
